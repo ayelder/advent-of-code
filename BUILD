@@ -10,3 +10,13 @@ cc_binary(
         "@com_google_absl//absl/strings:str_format",
     ],
 )
+
+
+cc_binary(
+    name = "day-2",
+    srcs = ["day_2_password_philosophy.cc"],
+    deps = [
+        "@com_google_absl//absl/strings",
+        "@com_google_absl//absl/strings:str_format",
+    ],
+)
