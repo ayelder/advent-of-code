@@ -27,3 +27,10 @@ cc_binary(
     deps = [
     ],
 )
+
+cc_binary(
+    name = "day-6",
+    srcs = ["day_6_custom_customs.cc"],
+    deps = [
+    ],
+)
