@@ -13,7 +13,12 @@
 // Each group's answers are separated by a blank line, and within each group,
 // each person's answers are on a single line.
 
+// Part 1
 // For each group, count the number of questions to which anyone answered "yes".
+// What is the sum of those counts?
+
+// Part 2
+// For each group, count the number of questions to which everyone answered "yes".
 // What is the sum of those counts?
 
 template <typename Entry>
