@@ -13,18 +13,21 @@
 #include <iostream>
 #include <math.h>
 #include <string_view>
+#include <unordered_set>
 #include <vector>
 
+constexpr int calc_seat_id(int row, int col) { return (row * 8) + col; }
+
 const int kNumRows = 128;
-const int kRowPosChars = (int) log2(kNumRows);
+const int kRowPosChars = (int)log2(kNumRows);
 const int kNumCols = 8;
-const int kColPosChars = (int) log2(kNumCols);
+const int kColPosChars = (int)log2(kNumCols);
+const int kMaxSeatId = calc_seat_id((kNumRows - 1), (kNumCols - 1));
 
 class SeatPosition
 {
-
 public:
-    SeatPosition(int row, int col) : row_(row), col_(col), seat_id_((row * 8) + col) {}
+    SeatPosition(int row, int col) : row_(row), col_(col), seat_id_(calc_seat_id(row, col)) {}
     int seat_id() const { return seat_id_; }
 
 private:
@@ -81,9 +84,20 @@ int main(int argc, char const *argv[])
 {
     std::vector<SeatPosition> pos_vec = read_file("/home/drew/workspace/advent-of-code/day_5_input.txt");
     int max_seat_id = 0;
-    for (const SeatPosition& seat_pos : pos_vec ) {
+    std::unordered_set<int> seats(kMaxSeatId + 1);
+    // Fill the set with all the seats (to be removed once we've determined all the filled seats)
+    for (int i = 0; i < kMaxSeatId + 1; i++) {
+        seats.insert(i);
+    }
+    for (const SeatPosition &seat_pos : pos_vec)
+    {
+        seats.erase(seat_pos.seat_id());
         max_seat_id = std::max(max_seat_id, seat_pos.seat_id());
     }
-    std::cout << "Max seat ID: " << max_seat_id;
+    std::cout << "Max seat ID: " << max_seat_id << std::endl;
+    std::cout << "Seats left: " << std::endl;
+    for (int seat : seats) {
+        std::cout << " " << seat << std::endl;
+    }
     return 0;
 }
