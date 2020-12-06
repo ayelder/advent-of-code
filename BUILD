@@ -20,3 +20,10 @@ cc_binary(
         "@com_google_absl//absl/strings:str_format",
     ],
 )
+
+cc_binary(
+    name = "day-5",
+    srcs = ["day_5_binary_boarding.cc"],
+    deps = [
+    ],
+)
